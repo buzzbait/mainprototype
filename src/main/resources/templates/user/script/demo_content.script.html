@@ -1,0 +1,44 @@
+<th:block layout:fragment="demo_content_js">
+<script th:src="@{/webjars/jquery/3.4.1/dist/jquery.min.js}"></script>
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+//이 페이지 에서는 최신버전의 Jquery 사용
+var _new_$ = $.noConflict(true);
+	
+_new_$(document).ready(function() {
+	console.log("Fragment Done");
+	
+	_new_$("#btnGo").click(function(){
+		//alert("Button Click");
+		getMenuList();
+		getMenuInfo();
+	});
+	
+});
+
+//callback 함수를 분리한 예시
+function getMenuList(){
+	let uri = "/api/menu/usermenu";
+	callAjax("GET",uri,null,callbackGetMenuList);
+}
+
+function callbackGetMenuList(data){
+	console.log( JSON.stringify(data) );
+}
+
+//callback 함수를 임베딩한 예시
+function getMenuInfo(){
+	callAjax("GET"
+			 ,"/api/menu/usermenu" 
+        	 ,null
+        	 ,function(data){
+				 console.log( JSON.stringify(data) );	
+	         } );
+}
+
+
+/*]]>*/ 
+</script>
+</th:block>

@@ -1,0 +1,49 @@
+spring:
+  profiles:
+    active: local # 기본 환경 선택
+
+---
+spring:
+  profiles: local    
+  devtools:
+    restart:
+      exclude: static/**,/public/**
+  datasource:    
+    hikari:      
+      jdbc-url: jdbc:log4jdbc:mysql://localhost:3306/prototype?useUnicode=true&characterEncoding=utf-8
+      username: demo
+      password: demo 
+      driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy    
+      minimum-idle: 20
+      maximum-pool-size: 20
+      idle-timeout: 0
+      pool-name: hikariPool
+      max-lifetime: 28798000 
+      connection-timeout: 10000
+      transaction-isolation: TRANSACTION_READ_COMMITTED
+      leak-detection-threshold: 2000    
+thymeleaf:
+  cache: false
+
+---
+spring:
+  profiles: prod
+  devtools:
+    restart:
+      exclude: static/**,/public/**
+  datasource:    
+    hikari:      
+      jdbc-url: jdbc:log4jdbc:mysql://localhost:3306/prototype?useUnicode=true&characterEncoding=utf-8
+      username: demo
+      password: demo11 
+      driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy    
+      minimum-idle: 20
+      maximum-pool-size: 20
+      idle-timeout: 0
+      pool-name: hikariPool
+      max-lifetime: 28798000
+      connection-timeout: 10000
+      transaction-isolation: TRANSACTION_READ_COMMITTED
+      leak-detection-threshold: 2000
+thymeleaf:
+  cache: true
